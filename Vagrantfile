@@ -12,9 +12,9 @@ RANCH_MASTER_ADDRESS="172.19.8.100"
 RANCH_SUBNET="172.19.8"
 
 
-RANCHER_SERVER_DOMAIN_NAME="ranch-svr.infracloud.io"
-RANCHER_CLIENT_DEF="ranch-k8s1.infracloud.io"
-RANCHER_CLIENT_K8S="ranch-k8s2.infracloud.io"
+RANCHER_SERVER_DOMAIN_NAME="ranch-svr.local"
+RANCHER_CLIENT_DEF="ranch-k8s1.local"
+RANCHER_CLIENT_K8S="ranch-k8s2.local"
 
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
@@ -39,7 +39,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 		end
 		rclient.vm.provision "shell", inline: "wget -qO- https://get.docker.com/ | sh"		
 		# K8S works with slightly older version of Docker hence downgrading
-		rclient.vm.provision "shell", inline: "sudo apt-get install -y --force-yes docker-engine=1.13.1-0~ubuntu-xenial"		
+		rclient.vm.provision "shell", inline: "sudo apt-get install -y --force-yes docker-engine=1.12.6-0~ubuntu-xenial"		
 	end
 
 	config.vm.define "ranch_c_k8s2" do |rclient|
@@ -51,7 +51,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 		end
 		rclient.vm.provision "shell", inline: "wget -qO- https://get.docker.com/ | sh"
 		# K8S works with slightly older version of Docker hence downgrading
-		rclient.vm.provision "shell", inline: "sudo apt-get install -y --force-yes docker-engine=1.13.1-0~ubuntu-xenial"
+		rclient.vm.provision "shell", inline: "sudo apt-get install -y --force-yes docker-engine=1.12.6-0~ubuntu-xenial"
 	end
 
 end

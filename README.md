@@ -1,3 +1,4 @@
+Solution is inspired by https://github.com/infracloudio/rancher-vagrant-setup, here is just upgraded to use Ubuntu 16.04 and more recent docker-engine 1.12.3
 
 A simple setup which creates Vagrant boxes installs Docker on each and configures Rancher server on master box.
 
