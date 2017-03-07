@@ -27,7 +27,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 			vba.customize ["modifyvm", :id, "--memory", MASTER_MEMORY]
 			vba.customize ["modifyvm", :id, "--cpus", 2]
 		end
-		rserver.vm.provision "shell", inline: "wget -qO- https://get.docker.com/ | sh"			
+		rserver.vm.provision "shell", inline: "sudo curl https://releases.rancher.com/install-docker/1.13.sh | sh"
 		rserver.vm.provision "shell", inline: "sudo docker run -d --restart=always -p 8080:8080 rancher/server"		
 	end
 
@@ -39,9 +39,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 			vba.customize ["modifyvm", :id, "--memory", AGENT_MEMORY]
 			vba.customize ["modifyvm", :id, "--cpus", 2]
 		end
-		rclient.vm.provision "shell", inline: "wget -qO- https://get.docker.com/ | sh"		
 		# K8S works with slightly older version of Docker hence downgrading
-		rclient.vm.provision "shell", inline: "sudo apt-get install -y --force-yes docker-engine=1.12.6-0~ubuntu-xenial"
+		rclient.vm.provision "shell", inline: "sudo curl https://releases.rancher.com/install-docker/1.13.sh | sh"
 	end
 
 	config.vm.define "ranch_c_k8s2" do |rclient|
@@ -51,9 +50,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 		rclient.vm.provider :virtualbox do |vba|
 			vba.customize ["modifyvm", :id, "--memory", AGENT_MEMORY]
 		end
-		rclient.vm.provision "shell", inline: "wget -qO- https://get.docker.com/ | sh"
 		# K8S works with slightly older version of Docker hence downgrading
-		rclient.vm.provision "shell", inline: "sudo apt-get install -y --force-yes docker-engine=1.12.6-0~ubuntu-xenial"
+		rclient.vm.provision "shell", inline: "sudo curl https://releases.rancher.com/install-docker/1.13.sh | sh"
 	end
 
 end
